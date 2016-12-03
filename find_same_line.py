@@ -11,40 +11,34 @@ def find_same_line(arg_file):
     except Exception as e:
         raise SystemExit(e)
 
-    try:
-        file_content = fd.readlines()
+    file_content = fd.readlines()
+    fd.close()
 
-        # The same line had been found.
-        same_line_content = []
+    # The same line had been found.
+    same_line_content = []
 
-        source_line_num = 1
-        for source_line in file_content:
-            same_line_num = []
+    source_line_num = 1
+    for source_line in file_content:
+        same_line_num = []
 
-            target_line_num = 1
-            for target_line in file_content:
-                if (source_line.strip() == target_line.strip()) \
-                   and (source_line_num != target_line_num) \
-                   and (source_line.strip() not in same_line_content) \
-                   and (source_line.strip()):
-                    same_line_num.append(target_line_num)
+        target_line_num = 1
+        for target_line in file_content:
+            if (source_line.strip() == target_line.strip()) \
+               and (source_line_num != target_line_num) \
+               and (source_line.strip() not in same_line_content) \
+               and (source_line.strip()):
+                same_line_num.append(target_line_num)
 
-                target_line_num += 1
+            target_line_num += 1
 
-            if same_line_num:
-                print '\nLine ' + str(source_line_num) + ': ' + source_line.strip()
-                print 'Same to line: ',
-                for ln in same_line_num:
-                    print str(ln) + ' ',
+        if same_line_num:
+            print '\nLine ' + str(source_line_num) + ': ' + source_line.strip()
+            print 'Same to line: ',
+            for ln in same_line_num:
+                print str(ln) + ' ',
 
-            same_line_content.append(source_line.strip())
-            source_line_num += 1
-
-    except Exception as e:
-        print e
-
-    finally:
-        fd.close()
+        same_line_content.append(source_line.strip())
+        source_line_num += 1
 
 
 def main():
