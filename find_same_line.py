@@ -22,26 +22,26 @@ def find_same_line(arg_file):
     for source_line in file_content:
         same_line_num = []
 
-        target_line_num = 1
-        # Compare all lines.
-        for target_line in file_content:
-            if (source_line.strip() == target_line.strip()) \
-            and (source_line_num != target_line_num) \
-            and (source_line.strip() not in same_line_content) \
-            and (source_line.strip()):
-                same_line_num.append(target_line_num)
+        if source_line.strip() not in same_line_content:
+            target_line_num = 1
+            # Compare all lines.
+            for target_line in file_content:
+                if (source_line.strip() == target_line.strip()) \
+                and (source_line_num != target_line_num) \
+                and (source_line.strip()):
+                    same_line_num.append(target_line_num)
 
-            target_line_num += 1
+                target_line_num += 1
 
         if same_line_num:
             print 'Line ' + str(source_line_num) + ': ' + source_line.strip()
             print 'Same to line:',
             for ln in same_line_num:
                 print str(ln),
-
             print '\n'
 
-        same_line_content.append(source_line.strip())
+            same_line_content.append(source_line.strip())
+
         source_line_num += 1
 
 
