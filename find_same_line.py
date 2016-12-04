@@ -18,10 +18,12 @@ def find_same_line(arg_file):
     same_line_content = []
 
     source_line_num = 1
+    # Read each line.
     for source_line in file_content:
         same_line_num = []
 
         target_line_num = 1
+        # Compare all lines.
         for target_line in file_content:
             if (source_line.strip() == target_line.strip()) \
             and (source_line_num != target_line_num) \
@@ -32,10 +34,12 @@ def find_same_line(arg_file):
             target_line_num += 1
 
         if same_line_num:
-            print '\nLine ' + str(source_line_num) + ': ' + source_line.strip()
-            print '  Same to line:',
+            print 'Line ' + str(source_line_num) + ': ' + source_line.strip()
+            print 'Same to line:',
             for ln in same_line_num:
-                print str(ln) + ' ',
+                print str(ln),
+
+            print '\n'
 
         same_line_content.append(source_line.strip())
         source_line_num += 1
