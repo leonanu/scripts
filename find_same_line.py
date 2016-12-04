@@ -17,18 +17,18 @@ def find_same_line(arg_file):
     # The same line had been found.
     same_line_content = []
 
-    source_line_num = 1
+    source_line_index = 0
+    source_line_num = source_line_index + 1
     # Read each line.
     for source_line in file_content:
         same_line_num = []
 
-        if source_line.strip() not in same_line_content \
-        and source_line.strip():
-            target_line_num = 1
-            # Compare all lines.
-            for target_line in file_content:
-                if source_line.strip() == target_line.strip() \
-                and source_line_num != target_line_num:
+        if source_line.strip() \
+        and source_line.strip() not in same_line_content:
+            # Compare the rest of lines.
+            target_line_num = source_line_num + 1
+            for target_line in file_content[source_line_index + 1:]:
+                if source_line.strip() == target_line.strip():
                     same_line_num.append(target_line_num)
 
                 target_line_num += 1
@@ -42,6 +42,7 @@ def find_same_line(arg_file):
 
             same_line_content.append(source_line.strip())
 
+        source_line_index += 1
         source_line_num += 1
 
 
