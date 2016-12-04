@@ -33,7 +33,7 @@ def find_same_line(arg_file):
 
         if same_line_num:
             print '\nLine ' + str(source_line_num) + ': ' + source_line.strip()
-            print 'Same to line: ',
+            print '  Same to line:',
             for ln in same_line_num:
                 print str(ln) + ' ',
 
