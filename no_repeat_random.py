@@ -3,21 +3,20 @@
 
 import random
 
-count = int(raw_input('The number of elements: '))
 
-mydict = {}
+RND_RANGE = 100
+
+count = int(raw_input('How many random integer number you want? '))
+
+lst_random = []
 
 for i in range(count):
-    value = hex(random.randint(0, count))
+    value = random.randint(0, RND_RANGE)
 
-    current_value = []
-    for k in mydict.keys():
-        current_value.append(mydict[k])
+    while value in lst_random:
+        value = random.randint(0, RND_RANGE)
 
-    while value in current_value:
-        value = hex(random.randint(0, count))
-
-    mydict[i] = value
+    lst_random.append(value)
 
 
-print mydict
+print lst_random
