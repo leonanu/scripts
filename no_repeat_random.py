@@ -24,7 +24,7 @@ elif count < LIMITATION:
         lst_random.append(value)
 
 else:
-    error = '\nError!\nYour want %d random number, but the random number LIMITATION is %d.' % (count, LIMITATION)
+    error = '\nError!\nYour want %d random numbers, but the random number LIMITATION is %d.' % (count, LIMITATION)
     raise SystemExit(error)
 
 print lst_random
