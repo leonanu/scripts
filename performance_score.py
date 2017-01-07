@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 # The total person of your department.
-PERSON = 300
+PERSON = 13
 
 # The ratio of levels.
 SCORE_A = 1.5
@@ -19,7 +19,7 @@ GOAL_LOWER = 0.99
 ALLOW_NO_A = False
 ALLOW_NO_B = False
 ALLOW_NO_C = False
-ALLOW_NO_D = True
+ALLOW_NO_D = False
 
 
 count = 1

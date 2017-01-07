@@ -4,7 +4,7 @@
 import random
 
 
-RND_RANGE = 100
+RND_RANGE = 1000000
 
 count = int(raw_input('How many random integer number you want? '))
 
