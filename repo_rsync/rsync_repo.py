@@ -11,22 +11,22 @@ STATUS_LOG = '/repo/Status.html'
 
 ### Repo information.
 REPO_CENTOS6 = { 'repo_name':'CentOS6',
-                 'repo_url':'rsync://rsync.mirrors.ustc.edu.cn/centos/6/',
+                 'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/centos/6/',
                  'repo_dir':'/repo/centos/6/',
                  'exclude_list':'/usr/local/bin/exclude_centos6.list', }
 
 REPO_CENTOS7 = { 'repo_name':'CentOS7',
-                 'repo_url':'rsync://rsync.mirrors.ustc.edu.cn/centos/7/',
+                 'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/centos/7/',
                  'repo_dir':'/repo/centos/7/',
                  'exclude_list':'/usr/local/bin/exclude_centos7.list', }
 
 REPO_EPEL6 = { 'repo_name':'EPEL6',
-               'repo_url':'rsync://rsync.mirrors.ustc.edu.cn/epel/6/x86_64/',
+               'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/epel/6/x86_64/',
                'repo_dir':'/repo/epel/6/x86_64/',
                'exclude_list':'/usr/local/bin/exclude_epel6.list', }
 
 REPO_EPEL7 = { 'repo_name':'EPEL7',
-               'repo_url':'rsync://rsync.mirrors.ustc.edu.cn/epel/7/x86_64/',
+               'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/epel/7/x86_64/',
                'repo_dir':'/repo/epel/7/x86_64/',
                'exclude_list':'/usr/local/bin/exclude_epel7.list', }
 
@@ -75,6 +75,8 @@ def sync_repo(repo_info):
     status = 1
     while RSYNC_TRY_TIMES > 0 and status != 0:
         (status, output) = commands.getstatusoutput(sync_cmd)
+        # Debug
+        #print output
         if status == 0:
             break
 
