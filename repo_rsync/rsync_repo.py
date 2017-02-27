@@ -31,7 +31,7 @@ REPO_EPEL7 = { 'repo_name':'EPEL7',
                'exclude_list':'/usr/local/bin/exclude_epel7.list', }
 
 
-def status_log(repo_name, status):
+def status_log(repo_name, repo_url, status):
     now_date = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 
     if status == 0:
@@ -46,10 +46,12 @@ def status_log(repo_name, status):
         print e
 
     title = '<p><strong>' + repo_name + ' Rsync Status</strong>\n'
-    dtime = '<br>' + 'Last Sync: ' + now_date + '\n'
-    status = '<br>' + 'Sync Status: ' + status + '\n<p>'
+    repo_url = '<br>Repo URL: ' + repo_url + '\n'
+    dtime = '<br>Last Sync: ' + now_date + '\n'
+    status = '<br>Sync Status: ' + status + '\n<p>'
 
     fd.write(title)
+    fd.write(repo_url)
     fd.write(dtime)
     fd.write(status)
 
@@ -86,7 +88,7 @@ def sync_repo(repo_info):
     chmod_cmd = '/usr/bin/chown -R www:www ' + repo_dir
     os.system(chmod_cmd)
 
-    status_log(repo_name, status)
+    status_log(repo_name, repo_url, status)
 
 
 def main():
