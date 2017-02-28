@@ -10,35 +10,35 @@ import commands
 STATUS_LOG = '/repo/Status.html'
 
 ### Repo information.
-REPO_CENTOS6 = { 'repo_name':'CentOS6',
-                 'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/centos/6/',
-                 'repo_dir':'/repo/centos/6/',
-                 'exclude_list':'/usr/local/bin/exclude_centos6.list', }
+REPO_LIST = [ { 'repo_name':'CentOS6',
+                'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/centos/6/',
+                'repo_dir':'/repo/centos/6/',
+                'exclude_list':'/usr/local/bin/exclude_centos6.list', },
 
-REPO_CENTOS7 = { 'repo_name':'CentOS7',
-                 'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/centos/7/',
-                 'repo_dir':'/repo/centos/7/',
-                 'exclude_list':'/usr/local/bin/exclude_centos7.list', }
+              { 'repo_name':'CentOS7',
+                'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/centos/7/',
+                'repo_dir':'/repo/centos/7/',
+                'exclude_list':'/usr/local/bin/exclude_centos7.list', },
 
-REPO_EPEL6 = { 'repo_name':'EPEL6',
-               'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/epel/6/x86_64/',
-               'repo_dir':'/repo/epel/6/x86_64/',
-               'exclude_list':'/usr/local/bin/exclude_epel6.list', }
+              { 'repo_name':'EPEL6',
+                'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/epel/6/x86_64/',
+                'repo_dir':'/repo/epel/6/x86_64/',
+                'exclude_list':'/usr/local/bin/exclude_epel6.list', },
 
-REPO_EPEL7 = { 'repo_name':'EPEL7',
-               'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/epel/7/x86_64/',
-               'repo_dir':'/repo/epel/7/x86_64/',
-               'exclude_list':'/usr/local/bin/exclude_epel7.list', }
+              { 'repo_name':'EPEL7',
+                'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/epel/7/x86_64/',
+                'repo_dir':'/repo/epel/7/x86_64/',
+                'exclude_list':'/usr/local/bin/exclude_epel7.list', },
 
-REPO_SALT6 = { 'repo_name':'SaltStack6',
-               'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/saltstack/yum/redhat/6/x86_64/latest/',
-               'repo_dir':'/repo/saltstack/yum/redhat/6/x86_64/latest/',
-               'exclude_list':'/usr/local/bin/exclude_salt-latest6.list', }
+              { 'repo_name':'SaltStack6',
+                'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/saltstack/yum/redhat/6/x86_64/latest/',
+                'repo_dir':'/repo/saltstack/yum/redhat/6/x86_64/latest/',
+                'exclude_list':'/usr/local/bin/exclude_salt-latest6.list', },
 
-REPO_SALT7 = { 'repo_name':'SaltStack7',
-               'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/saltstack/yum/redhat/7/x86_64/latest/',
-               'repo_dir':'/repo/saltstack/yum/redhat/7/x86_64/latest/',
-               'exclude_list':'/usr/local/bin/exclude_salt-latest7.list', }
+              { 'repo_name':'SaltStack7',
+                'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/saltstack/yum/redhat/7/x86_64/latest/',
+                'repo_dir':'/repo/saltstack/yum/redhat/7/x86_64/latest/',
+                'exclude_list':'/usr/local/bin/exclude_salt-latest7.list', }, ]
 
 
 def status_log(repo_name, repo_url, status):
@@ -105,7 +105,7 @@ def main():
     if os.path.isfile(STATUS_LOG):
         os.remove(STATUS_LOG)
 
-    for repo in [REPO_CENTOS6, REPO_CENTOS7, REPO_EPEL6, REPO_EPEL7, REPO_SALT6, REPO_SALT7]:
+    for repo in REPO_LIST:
         sync_repo(repo)
 
 
