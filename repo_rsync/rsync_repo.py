@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import os
+import re
 import time
 import commands
 
@@ -9,34 +10,37 @@ import commands
 # The status log file path and name.
 STATUS_LOG = '/repo/Status.html'
 
+# Repo Site
+REPO_SITE = 'rsync://mirrors.tuna.tsinghua.edu.cn'
+
 ### Repo information.
 REPO_LIST = [ { 'repo_name':'CentOS6',
-                'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/centos/6/',
+                'repo_url':REPO_SITE + '/centos/6/',
                 'repo_dir':'/repo/centos/6/',
                 'exclude_list':'/usr/local/bin/exclude_centos6.list', },
 
               { 'repo_name':'CentOS7',
-                'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/centos/7/',
+                'repo_url':REPO_SITE + '/centos/7/',
                 'repo_dir':'/repo/centos/7/',
                 'exclude_list':'/usr/local/bin/exclude_centos7.list', },
 
               { 'repo_name':'EPEL6',
-                'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/epel/6/x86_64/',
+                'repo_url':REPO_SITE + '/epel/6/x86_64/',
                 'repo_dir':'/repo/epel/6/x86_64/',
                 'exclude_list':'/usr/local/bin/exclude_epel6.list', },
 
               { 'repo_name':'EPEL7',
-                'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/epel/7/x86_64/',
+                'repo_url':REPO_SITE + '/epel/7/x86_64/',
                 'repo_dir':'/repo/epel/7/x86_64/',
                 'exclude_list':'/usr/local/bin/exclude_epel7.list', },
 
               { 'repo_name':'SaltStack6',
-                'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/saltstack/yum/redhat/6/x86_64/latest/',
+                'repo_url':REPO_SITE + '/saltstack/yum/redhat/6/x86_64/latest/',
                 'repo_dir':'/repo/saltstack/yum/redhat/6/x86_64/latest/',
                 'exclude_list':'/usr/local/bin/exclude_salt-latest6.list', },
 
               { 'repo_name':'SaltStack7',
-                'repo_url':'rsync://mirrors.tuna.tsinghua.edu.cn/saltstack/yum/redhat/7/x86_64/latest/',
+                'repo_url':REPO_SITE + '/saltstack/yum/redhat/7/x86_64/latest/',
                 'repo_dir':'/repo/saltstack/yum/redhat/7/x86_64/latest/',
                 'exclude_list':'/usr/local/bin/exclude_salt-latest7.list', }, ]
 
@@ -45,9 +49,9 @@ def status_log(repo_name, repo_url, status):
     now_date = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 
     if status == 0:
-        status = 'OK!'
+        status = '<strong><font color="green">OK!</font></strong>'
     else:
-        status = 'FAILED!'
+        status = '<strong><font color="red">FAILED!</font></strong>'
 
     try:
         fd = open(STATUS_LOG, 'a')
@@ -56,9 +60,13 @@ def status_log(repo_name, repo_url, status):
         print e
 
     title = '<p><strong>' + repo_name + ' Rsync Status</strong>\n'
-    repo_url = '<br>Repo URL: ' + repo_url + '\n'
     dtime = '<br>Last Sync: ' + now_date + '\n'
     status = '<br>Sync Status: ' + status + '\n<p>'
+
+    if re.match(r'^rsync://', repo_url):
+        repo_url = re.sub(r'^rsync://', 'http://', repo_url)
+
+    repo_url = '<br>Repo URL: <a href="' + repo_url + '" target="_blank">' + repo_url + '</a>\n'
 
     fd.write(title)
     fd.write(repo_url)
