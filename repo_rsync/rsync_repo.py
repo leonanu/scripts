@@ -89,7 +89,7 @@ def sync_repo(repo_info):
     exclude_list = repo_info['exclude_list']
 
     sync_cmd = '/usr/bin/rsync -avrt --timeout=300 --contimeout=300\
-                --delete --delete-excluded --progress ' +\
+                --delete --delete-excluded --progress --stats ' +\
                 repo_url + ' --exclude-from=' + exclude_list + ' ' + repo_dir
 
     status = 1
