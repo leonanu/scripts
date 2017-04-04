@@ -5,10 +5,19 @@ import os
 import re
 import time
 import commands
+import smtplib
+from email.mime.text import MIMEText
 
+
+# Update notify mail settings
+SMTP_SERVER = 'smtp.qq.com'
+SMTP_SSL_PORT = '465'
+USERNAME = ''
+PASSWORD = ''
+RECIPEENTS = ''
 
 # The status log file path and name.
-STATUS_LOG = '/repo/Status.html'
+STATUS_LOG = '/data/wwwroot/repo.inanu.net/Status.html'
 
 # Repo Site
 REPO_SITE = 'rsync://mirrors.tuna.tsinghua.edu.cn'
@@ -16,33 +25,55 @@ REPO_SITE = 'rsync://mirrors.tuna.tsinghua.edu.cn'
 ### Repo information.
 REPO_LIST = [ { 'repo_name':'CentOS6',
                 'repo_url':REPO_SITE + '/centos/6/',
-                'repo_dir':'/repo/centos/6/',
+                'repo_dir':'/data/wwwroot/repo.inanu.net/centos/6/',
                 'exclude_list':'/usr/local/bin/exclude_centos6.list', },
 
               { 'repo_name':'CentOS7',
                 'repo_url':REPO_SITE + '/centos/7/',
-                'repo_dir':'/repo/centos/7/',
+                'repo_dir':'/data/wwwroot/repo.inanu.net/centos/7/',
                 'exclude_list':'/usr/local/bin/exclude_centos7.list', },
 
               { 'repo_name':'EPEL6',
                 'repo_url':REPO_SITE + '/epel/6/x86_64/',
-                'repo_dir':'/repo/epel/6/x86_64/',
+                'repo_dir':'/data/wwwroot/repo.inanu.net/epel/6/x86_64/',
                 'exclude_list':'/usr/local/bin/exclude_epel6.list', },
 
               { 'repo_name':'EPEL7',
                 'repo_url':REPO_SITE + '/epel/7/x86_64/',
-                'repo_dir':'/repo/epel/7/x86_64/',
+                'repo_dir':'/data/wwwroot/repo.inanu.net/epel/7/x86_64/',
                 'exclude_list':'/usr/local/bin/exclude_epel7.list', },
 
               { 'repo_name':'SaltStack6',
                 'repo_url':REPO_SITE + '/saltstack/yum/redhat/6/x86_64/latest/',
-                'repo_dir':'/repo/saltstack/yum/redhat/6/x86_64/latest/',
+                'repo_dir':'/data/wwwroot/repo.inanu.net/saltstack/yum/redhat/6/x86_64/latest/',
                 'exclude_list':'/usr/local/bin/exclude_salt-latest6.list', },
 
               { 'repo_name':'SaltStack7',
                 'repo_url':REPO_SITE + '/saltstack/yum/redhat/7/x86_64/latest/',
-                'repo_dir':'/repo/saltstack/yum/redhat/7/x86_64/latest/',
+                'repo_dir':'/data/wwwroot/repo.inanu.net/saltstack/yum/redhat/7/x86_64/latest/',
                 'exclude_list':'/usr/local/bin/exclude_salt-latest7.list', }, ]
+
+
+def send_mail(mail_subject, mail_content):
+    msg = MIMEText(mail_content)
+    msg['Subject'] = mail_subject
+    msg['From'] = USERNAME
+    msg['To']   = RECIPEENTS
+
+    retry = 3
+    while retry > 0:
+        try:
+            s = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_SSL_PORT)
+            s.login(USERNAME, PASSWORD)
+            s.sendmail(USERNAME, RECIPEENTS, msg.as_string())
+            s.quit()
+
+            break
+
+        except smtplib.SMTPException,e:
+            retry -= 1
+            if retry > 0:
+                time.sleep(10)
 
 
 def status_log(repo_name, repo_url, status):
@@ -97,7 +128,15 @@ def sync_repo(repo_info):
         (status, output) = commands.getstatusoutput(sync_cmd)
         # Debug - output
         #print output
+
         if status == 0:
+            # Send mail while mirror updated.
+            trans_file = re.findall(r'Number of files transferred:(.*)', output)
+            if int(trans_file[0].strip()) > 0:
+                mail_subject = repo_name + ' 已有新的更新'
+                mail_content = output
+                send_mail(mail_subject, mail_content)
+
             break
 
         RSYNC_TRY_TIMES -= 1
