@@ -10,8 +10,9 @@ from email.mime.text import MIMEText
 
 
 # Update notify mail settings
-SMTP_SERVER = 'smtp.qq.com'
-SMTP_SSL_PORT = '465'
+SEND_MAIL = 0
+SMTP_SERVER = ''
+SMTP_SSL_PORT = ''
 USERNAME = ''
 PASSWORD = ''
 RECIPEENTS = ''
@@ -130,12 +131,12 @@ def sync_repo(repo_info):
         #print output
 
         if status == 0:
-            # Send mail while mirror updated.
-            trans_file = re.findall(r'Number of files transferred:(.*)', output)
-            if int(trans_file[0].strip()) > 0:
-                mail_subject = repo_name + ' 已有新的更新'
-                mail_content = output
-                send_mail(mail_subject, mail_content)
+            if SEND_MAIL:
+                trans_file = re.findall(r'Number of files transferred:(.*)', output)
+                if int(trans_file[0].strip()) > 0:
+                    mail_subject = repo_name + ' 已有新的更新'
+                    mail_content = output
+                    send_mail(mail_subject, mail_content)
 
             break
 
