@@ -24,7 +24,7 @@ class Password(object):
         return res
 
     def alpha(self, element):
-        alphabet = 'abcdefghigklmnopqrstuvwxyz'
+        alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
         is_upper = False
 
