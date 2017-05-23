@@ -10,7 +10,6 @@ class Password(object):
         self.password = password
 
     def run(self):
-        print self.password
         res = []
         for i in self.password:
             if i.isalpha():
