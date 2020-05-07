@@ -2,9 +2,8 @@
 # -*- coding: UTF-8 -*-
 
 import json
-import math
 import sys
-from urllib import parse,request
+from urllib import request
  
 
 LINODE_ID = ''
@@ -18,19 +17,21 @@ def getTransfer(linode_id, argv):
         'Authorization': 'Bearer ' + LINODE_TOKEN_RO}
  
     req = request.Request(url, headers=header_dict)
-    res = request.urlopen(req)
+    res = request.urlopen(req, timeout=10)
     ret = res.read()
  
     jsonData = json.loads(ret)
     transfer_quota = float(round(jsonData['quota'], 2))
-    transfer_used = round(jsonData['used'] / math.pow(1024, 3), 2)
+    transfer_used = round(jsonData['used'] / pow(1024, 3), 2)
  
     if argv == 'quota':
         print(transfer_quota)
-    if argv == 'used':
+    elif argv == 'used':
         print(transfer_used)
-    if argv == 'percent':
+    elif argv == 'percent':
         print(round(float(transfer_used / transfer_quota * 100), 1))
+    else:
+        print('Invalid argument!')
  
 
 def main():
