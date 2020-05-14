@@ -13,7 +13,7 @@ LINODE_TOKEN_RO = ''
 def getTransfer(linode_id, argv):
     url = 'https://api.linode.com/' + LINODE_API_VER + '/linode/instances/' + linode_id + '/transfer'
     header_dict = {
-        'User-Agent': 'User-Agent: curl/7.68.0',
+        'User-Agent': 'curl/7.68.0',
         'Authorization': 'Bearer ' + LINODE_TOKEN_RO
     }
  
