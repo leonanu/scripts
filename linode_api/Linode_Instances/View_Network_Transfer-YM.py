@@ -49,7 +49,7 @@ def main():
             print('Integer digitals only!')
 
         elif len(year_month) < 5 or len(year_month) > 6:
-            print('Year must be 4-digital!')
+            print('Year+month format error!')
 
         elif int(year) < 2000 or int(year) > 2037:
             print('Year must be between 2000-2037!')
