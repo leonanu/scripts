@@ -27,7 +27,12 @@ def reboot(linode_id):
  
 
 def main():
-    reboot(LINODE_ID)
+    opt = str(input('Reboot Linode (ID:' + LINODE_ID + ')? (y/N) ').strip())
+    if opt == 'y' or opt == 'Y':
+        print('Rebooting ...')
+        #reboot(LINODE_ID)
+    else:
+        print('Reboot Cancelled.')
  
 
 if __name__ == '__main__':
