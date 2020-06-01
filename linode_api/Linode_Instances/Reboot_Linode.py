@@ -30,7 +30,7 @@ def main():
     opt = str(input('Reboot Linode (ID:' + LINODE_ID + ')? (y/N) ').strip())
     if opt == 'y' or opt == 'Y':
         print('Rebooting ...')
-        #reboot(LINODE_ID)
+        reboot(LINODE_ID)
     else:
         print('Reboot Cancelled.')
  
