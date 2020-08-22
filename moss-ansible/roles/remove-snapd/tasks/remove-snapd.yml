@@ -6,7 +6,10 @@
     - 'snap remove --purge lxd'
     - 'snap remove --purge core18'
     - 'snap remove --purge snapd'
+  register: task_output
   ignore_errors: yes
+
+- debug: var=task_output
 
 - name: 'Remove snapd Service'
   tags: 'remove-snapd'

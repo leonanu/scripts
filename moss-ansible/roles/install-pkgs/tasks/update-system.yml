@@ -5,4 +5,7 @@
     update_cache: yes
     autoclean: yes
     autoremove: yes
+  register: task_output
   when: ansible_distribution == 'Ubuntu'
+
+- debug: var=task_output

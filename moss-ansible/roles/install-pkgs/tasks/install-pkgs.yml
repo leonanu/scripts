@@ -4,5 +4,8 @@
     name: "{{ PKGS }}"
     state: present
     update_cache: yes
+  register: task_output
   when: ansible_distribution  == 'Ubuntu' and 
         ansible_distribution_version == '20.04'
+
+- debug: var=task_output

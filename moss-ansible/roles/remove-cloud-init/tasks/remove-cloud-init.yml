@@ -4,6 +4,9 @@
     name: cloud-init
     state: absent
     purge: yes
+  register: task_output
+
+- debug: var=task_output
 
 - name: 'Clean cloud-init'
   tags: 'remove-cloud-init'

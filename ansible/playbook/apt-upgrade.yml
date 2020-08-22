@@ -1,0 +1,14 @@
+---
+- hosts: Nanu
+  remote_user: root
+
+  tasks:
+    - name: 'APT Upgrade'
+      apt:
+        upgrade: 'yes'
+        update_cache: yes
+        autoremove: yes
+        purge: yes
+      register: task_output
+
+    - debug: var=task_output
