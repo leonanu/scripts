@@ -5,18 +5,13 @@
     dest: '/etc/security/limits.d/moss.conf'
     mode: 0644
 
-- name: 'Optimize Systemd Limits - CORE'
-  tags: 'opt-limits-systemd-core'
+- name: 'Optimize Systemd Limits'
+  tags: 'opt-limits-systemd'
   lineinfile:
     dest: '/etc/systemd/system.conf'
-    regexp: '^#?DefaultLimitCORE='
-    line: 'DefaultLimitCORE=100000'
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
     state: present
-
-- name: 'Optimize Systemd Limits - NOFILE'
-  tags: 'opt-limits-systemd-nofile'
-  lineinfile:
-    dest: '/etc/systemd/system.conf'
-    regexp: '^#?DefaultLimitNOFILE='
-    line: 'DefaultLimitNOFILE=100000'
-    state: present
+  with_items:
+    - { 'regexp':'^#?DefaultLimitCORE=', 'line':'DefaultLimitCORE=100000' }
+    - { 'regexp':'^#?DefaultLimitNOFILE=', 'line':'DefaultLimitNOFILE=100000' }

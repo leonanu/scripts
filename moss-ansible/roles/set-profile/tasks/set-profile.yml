@@ -1,20 +1,10 @@
-- name: 'Set Profile - history'
-  tags: 'set-profile-history'
+- name: 'Set Profile'
+  tags: 'set-profile'
   template:
-    src: 'history.sh.template'
-    dest: '/etc/profile.d/history.sh'
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
     mode: 0644
-
-- name: 'Set Profile - path'
-  tags: 'set-profile-path'
-  template:
-    src: 'path.sh.template'
-    dest: '/etc/profile.d/path.sh'
-    mode: 0644
-
-- name: 'Set Profile - locale'
-  tags: 'set-profile-locale'
-  template:
-    src: 'locale.sh.template'
-    dest: '/etc/profile.d/locale.sh'
-    mode: 0644
+  with_items:
+    - { 'src':'history.sh.template', 'dest':'/etc/profile.d/history.sh' }
+    - { 'src':'path.sh.template', 'dest':'/etc/profile.d/path.sh' }
+    - { 'src':'locale.sh.template', 'dest':'/etc/profile.d/locale.sh' }
