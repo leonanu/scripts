@@ -9,7 +9,7 @@
   register: task_output
   ignore_errors: yes
 
-- debug: var=task_output
+- debug: var=task_output.stdout_lines
 
 - name: 'Remove snapd Service'
   tags: 'remove-snapd'

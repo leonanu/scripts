@@ -2,10 +2,9 @@
   tags: 'set-vimrc'
   shell:
     cmd: 'cat {{ VIMRC }}'
-  register: vimrc
+  register: task_output
 
-#- debug:
-#    var: vimrc
+#- debug: var=task_output.stdout_lines
 
 - name: 'Copy Extended vimrc file'
   tags: 'set-vimrc'

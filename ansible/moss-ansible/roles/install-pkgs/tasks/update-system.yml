@@ -8,4 +8,4 @@
   register: task_output
   when: ansible_distribution == 'Ubuntu'
 
-- debug: var=task_output
+- debug: var=task_output.stdout_lines

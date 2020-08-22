@@ -8,4 +8,4 @@
   when: ansible_distribution  == 'Ubuntu' and 
         ansible_distribution_version == '20.04'
 
-- debug: var=task_output
+- debug: var=task_output.stdout_lines

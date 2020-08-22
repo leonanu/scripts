@@ -1,0 +1,12 @@
+---
+- hosts: Nanu
+  remote_user: root
+
+  tasks:
+    - name: 'Test'
+      tags: 'test'
+      shell:
+        cmd: 'ls /etc'
+      register: task_output
+
+    - debug: var=task_output.stdout_lines

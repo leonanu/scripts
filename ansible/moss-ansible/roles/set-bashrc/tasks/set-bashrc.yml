@@ -2,10 +2,9 @@
   tags: 'set-bashrc'
   shell:
     cmd: 'cat {{ BASHRC }}'
-  register: bashrc
+  register: task_output
 
-#- debug:
-#    var: bashrc
+#- debug: var=task_output.stdout_lines
 
 - name: 'Copy Extended bashrc file'
   tags: 'set-bashrc'

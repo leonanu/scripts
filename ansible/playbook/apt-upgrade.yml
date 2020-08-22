@@ -11,4 +11,4 @@
         purge: yes
       register: task_output
 
-    - debug: var=task_output
+    - debug: var=task_output.stdout_lines
