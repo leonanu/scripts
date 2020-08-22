@@ -1,19 +1,12 @@
-- name: 'Stop cloud-init Service'
-  tags: 'stop-cloud-init-service'
-  systemd:
-    name: cloud-init
-    state: stopped
-  ignore_errors: yes
-
 - name: 'Remove cloud-init Service'
-  tags: 'remove-cloud-init-service'
+  tags: 'remove-cloud-init'
   apt:
     name: cloud-init
     state: absent
     purge: yes
 
 - name: 'Clean cloud-init'
-  tags: 'clean-cloud-init'
+  tags: 'remove-cloud-init'
   file:
     path: "{{ item }}"
     state: absent

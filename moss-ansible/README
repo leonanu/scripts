@@ -1,0 +1,25 @@
+Avalable Tags
+=============
+disable-cron-mail
+<Role install-pkgs>
+  change-repo-ubuntu-20.04
+  install-pkgs-ubuntu-20.04
+  system-update-ubuntu
+<Role enable-root>
+  ansible-key
+  root-key
+  root-pass
+  root-ssh
+mute-bell
+opt-limits
+opt-sysctl
+remove-cloud-init
+remove-snapd
+set-bashrc
+set-bbr
+set-hostname
+set-ipv6
+set-profile
+set-timesyncd
+set-timezone
+set-vimrc

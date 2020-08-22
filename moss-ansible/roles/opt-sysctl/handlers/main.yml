@@ -1,0 +1,3 @@
+- name: 'Apply sysctl'
+  shell:
+    cmd: 'sysctl -p'

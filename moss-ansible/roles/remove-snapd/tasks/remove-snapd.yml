@@ -1,5 +1,5 @@
 - name: 'Remove snaps'
-  tags: 'remove-snapds'
+  tags: 'remove-snapd'
   shell:
     cmd: "{{ item }}"
   with_items:
@@ -9,14 +9,14 @@
   ignore_errors: yes
 
 - name: 'Remove snapd Service'
-  tags: 'remove-snapd-service'
+  tags: 'remove-snapd'
   apt:
     name: 'snapd'
     state: absent
     purge: yes
 
 - name: 'Clean snapd'
-  tags: 'clean-snapd'
+  tags: 'remove-snapd'
   file:
     path: "{{ item }}"
     state: absent

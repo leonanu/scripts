@@ -1,5 +1,5 @@
 - name: 'Get root cron Content'
-  tags: 'get-cron-root'
+  tags: 'disable-cron-mail'
   shell:
     cmd: 'cat "{{ ROOT_CRON }}"'
   register: cron_root

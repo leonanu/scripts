@@ -1,0 +1,8 @@
+- name: 'Set IPv6: {{ IPV6 }}'
+  tags: 'set-ipv6'
+  template:
+    src: '10-moss-ipv6.conf.template'
+    dest: '/etc/sysctl.d/10-moss-ipv6.conf'
+    mode: 0644
+  notify:
+    - 'Apply sysctl'

@@ -1,4 +1,0 @@
-- name: 'Disable UFW'
-  tags: 'disable-ufw'
-  ufw:
-    state: disabled

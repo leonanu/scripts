@@ -1,5 +1,5 @@
 - name: 'Get "{{ BASHRC }}" Content'
-  tags: 'get-bashrc'
+  tags: 'set-bashrc'
   shell:
     cmd: 'cat {{ BASHRC }}'
   register: bashrc
@@ -8,7 +8,7 @@
 #    var: bashrc
 
 - name: 'Copy Extended bashrc file'
-  tags: 'copy-bashrc'
+  tags: 'set-bashrc'
   template:
     src: 'bashrc.template'
     dest: '/tmp/moss-bashrc'
@@ -16,13 +16,13 @@
   when: not "# Moss - START" in bashrc.stdout_lines
 
 - name: 'Append Extended Settings to bashrc'
-  tags: 'append-bashrc'
+  tags: 'set-bashrc'
   shell:
     cmd: 'cat /tmp/moss-bashrc >> {{ BASHRC }}'
   when: not "# Moss - START" in bashrc.stdout_lines
 
 - name: 'Clean tmp bashrc'
-  tags: 'clean-bashrc'
+  tags: 'set-bashrc'
   file:
     path: '/tmp/moss-bashrc'
     state: absent

@@ -29,19 +29,13 @@
 
     - role: opt-sysctl
 
-    - role: enable-bbr
-      when: ENABLE_BBR == 'yes'
+    - role: set-bbr
 
-    - role: disable-ipv6
-      when: DISABLE_IPV6 == 'yes'
+    - role: set-ipv6
 
     - role: opt-limits
 
     - role: set-timesyncd
-
-    - role: disable-ufw
-      when: ansible_distribution  == 'Ubuntu' and
-            ansible_distribution_version == '20.04'
 
   tasks:
     - debug:

@@ -1,6 +1,0 @@
-- name: 'Disable IPv6'
-  tags: 'disable-ipv6'
-  template:
-    src: '10-moss-disable-ipv6.conf.template'
-    dest: '/etc/sysctl.d/10-moss-disable-ipv6.conf'
-    mode: 0644

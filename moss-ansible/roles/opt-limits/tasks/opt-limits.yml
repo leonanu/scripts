@@ -1,12 +1,12 @@
 - name: 'Optimize System Limits Config File'
-  tags: 'opt-limits-config'
+  tags: 'opt-limits'
   template:
     src: 'moss.conf.template'
     dest: '/etc/security/limits.d/moss.conf'
     mode: 0644
 
 - name: 'Optimize Systemd Limits'
-  tags: 'opt-limits-systemd'
+  tags: 'opt-limits'
   lineinfile:
     dest: '/etc/systemd/system.conf'
     regexp: "{{ item.regexp }}"

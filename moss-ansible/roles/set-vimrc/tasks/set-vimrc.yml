@@ -1,5 +1,5 @@
 - name: 'Get {{ VIMRC }} Content'
-  tags: 'get-vimrc'
+  tags: 'set-vimrc'
   shell:
     cmd: 'cat {{ VIMRC }}'
   register: vimrc
@@ -8,7 +8,7 @@
 #    var: vimrc
 
 - name: 'Copy Extended vimrc file'
-  tags: 'copy-vimrc'
+  tags: 'set-vimrc'
   template:
     src: 'vimrc.template'
     dest: '/tmp/moss-vimrc'
@@ -16,13 +16,13 @@
   when: not "\" Moss - START" in vimrc.stdout_lines
 
 - name: 'Append Extended Settings to vimrc'
-  tags: 'append-vimrc'
+  tags: 'set-vimrc'
   shell:
     cmd: 'cat /tmp/moss-vimrc >> {{ VIMRC }}'
   when: not "\" Moss - START" in vimrc.stdout_lines
 
 - name: 'Clean tmp vimrc'
-  tags: 'clean-vimrc'
+  tags: 'set-vimrc'
   file:
     path: '/tmp/moss-vimrc'
     state: absent

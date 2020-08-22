@@ -1,0 +1,7 @@
+{% if BBR == 'on' %}
+net.core.default_qdisc          = fq_codel
+net.ipv4.tcp_congestion_control = bbr
+{% elif BBR == 'off' %}
+net.core.default_qdisc          = fq_codel
+net.ipv4.tcp_congestion_control = cubic
+{% endif %}
