@@ -1,0 +1,5 @@
+- name: 'Restart timesyncd Service'
+  systemd:
+    name: systemd-timesyncd
+    state: restarted
+    enabled: yes

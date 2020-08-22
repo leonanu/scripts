@@ -1,0 +1,54 @@
+- name: 'Remove snapd - lxd'
+  tags: 'remove-snapd-lxd'
+  shell:
+    cmd: 'snap remove --purge lxd'
+  ignore_errors: yes
+
+- name: 'Remove snapd - core18'
+  tags: 'remove-snapd-core18'
+  shell:
+    cmd: 'snap remove --purge core18'
+  ignore_errors: yes
+
+- name: 'Remove snapd - snapd'
+  tags: 'remove-snapd-snapd'
+  shell:
+    cmd: 'snap remove --purge snapd'
+  ignore_errors: yes
+
+- name: 'Remove snapd Service'
+  tags: 'remove-snapd-service'
+  apt:
+    name: 'snapd'
+    state: absent
+    purge: yes
+
+- name: 'Remove snapd Directory - ~/snap'
+  tags: 'remove-snapd-dir-home'
+  file:
+    path: ~/snap
+    state: absent
+
+- name: 'Remove snapd Directory - /root/snap'
+  tags: 'remove-snapd-dir-root'
+  file:
+    path: /root/snap
+    state: absent
+
+- name: 'Remove snapd Directory - /snap'
+  tags: 'remove-snapd-dir-snap'
+  file:
+    path: /snap
+    state: absent
+
+- name: 'Remove snapd Directory - /var/snap'
+  tags: 'remove-snapd-dir-var'
+  file:
+    path: /var/snap
+    state: absent
+
+- name: 'Remove snapd Directory - /var/lib/snapd'
+  tags: 'remove-snapd-dir-var_lib'
+  file:
+    path: /var/lib/snapd
+    state: absent

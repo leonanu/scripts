@@ -1,0 +1,9 @@
+- name: 'Set timesyncd'
+  tags: 'set-timesyncd'
+  lineinfile:
+    dest: '/etc/systemd/timesyncd.conf'
+    regexp: '^#?NTP='
+    line: 'NTP={{ NTP_SERVER }}'
+    state: present
+  notify:
+    - 'Restart timesyncd Service'

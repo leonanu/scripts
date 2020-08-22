@@ -1,0 +1,50 @@
+---
+- hosts: init_hosts
+  remote_user: root
+
+  roles:
+    - role: install-pkgs
+
+    - role: set-hostname
+
+    - role: set-timezone
+
+    - role: remove-snapd
+      when: ansible_distribution  == 'Ubuntu' and
+            ansible_distribution_version == '20.04'
+
+    - role: remove-cloud-init
+      when: ansible_distribution  == 'Ubuntu' and
+            ansible_distribution_version == '20.04'
+
+    - role: mute-bell
+
+    - role: set-bashrc
+
+    - role: set-vimrc
+
+    - role: disable-cron-mail
+
+    - role: set-profile
+
+    - role: opt-sysctl
+
+    - role: enable-bbr
+      when: ENABLE_BBR == 'yes'
+
+    - role: disable-ipv6
+      when: DISABLE_IPV6 == 'yes'
+
+    - role: opt-limits
+
+    - role: set-timesyncd
+
+    - role: disable-ufw
+      when: ansible_distribution  == 'Ubuntu' and
+            ansible_distribution_version == '20.04'
+
+  tasks:
+    - debug:
+        msg: 
+          - 'Moss Has Configured System Successfully!'
+          - 'Please Reboot Host!'

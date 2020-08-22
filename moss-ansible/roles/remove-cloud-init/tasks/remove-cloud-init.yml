@@ -1,0 +1,37 @@
+- name: 'Stop cloud-init Service'
+  tags: 'stop-cloud-init-service'
+  systemd:
+    name: cloud-init
+    state: stopped
+  ignore_errors: yes
+
+- name: 'Remove cloud-init Service'
+  tags: 'remove-cloud-init-service'
+  apt:
+    name: cloud-init
+    state: absent
+    purge: yes
+
+- name: 'Remove cloud-init Directory - /etc/cloud'
+  tags: 'remove-cloud-init-dir-etc'
+  file:
+    path: /etc/cloud
+    state: absent
+
+- name: 'Remove cloud-init Directory - /var/lib/cloud'
+  tags: 'remove-cloud-init-dir-var_lib'
+  file:
+    path: /var/lib/cloud
+    state: absent
+
+- name: 'Remove cloud-init Log - /var/log/cloud-init.log'
+  tags: 'remove-cloud-init-log'
+  file:
+    path: /var/log/cloud-init.log
+    state: absent
+
+- name: 'Remove cloud-init Log - /var/log/cloud-init-output.log'
+  tags: 'remove-cloud-init-log-output'
+  file:
+    path: /var/log/cloud-init-output.log
+    state: absent

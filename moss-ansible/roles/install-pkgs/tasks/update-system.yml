@@ -1,0 +1,8 @@
+- name: 'APT Upgrade'
+  tags: 'system-update-ubuntu'
+  apt:
+    upgrade: 'yes'
+    update_cache: yes
+    autoclean: yes
+    autoremove: yes
+  when: ansible_distribution == 'Ubuntu'

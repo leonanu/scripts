@@ -1,0 +1,8 @@
+- name: 'Install Packages for Ubuntu 20.04'
+  tags: 'install-pkgs-ubuntu-20.04'
+  apt:
+    name: "{{ PKGS }}"
+    state: present
+    update_cache: yes
+  when: ansible_distribution  == 'Ubuntu' and 
+        ansible_distribution_version == '20.04'

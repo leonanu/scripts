@@ -1,0 +1,22 @@
+- name: 'Optimize System Limits Config File'
+  tags: 'opt-limits-config'
+  template:
+    src: 'moss.conf.template'
+    dest: '/etc/security/limits.d/moss.conf'
+    mode: 0644
+
+- name: 'Optimize Systemd Limits - CORE'
+  tags: 'opt-limits-systemd-core'
+  lineinfile:
+    dest: '/etc/systemd/system.conf'
+    regexp: '^#?DefaultLimitCORE='
+    line: 'DefaultLimitCORE=100000'
+    state: present
+
+- name: 'Optimize Systemd Limits - NOFILE'
+  tags: 'opt-limits-systemd-nofile'
+  lineinfile:
+    dest: '/etc/systemd/system.conf'
+    regexp: '^#?DefaultLimitNOFILE='
+    line: 'DefaultLimitNOFILE=100000'
+    state: present

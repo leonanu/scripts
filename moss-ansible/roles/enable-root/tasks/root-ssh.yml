@@ -1,0 +1,9 @@
+- name: 'Enable root SSH Login'
+  tags: 'root-ssh'
+  lineinfile:
+    dest: '/etc/ssh/sshd_config'
+    regexp: '^#?PermitRootLogin'
+    line: 'PermitRootLogin yes'
+    state: present
+  notify:
+    - 'Restart sshd Service'

@@ -1,0 +1,7 @@
+- name: 'Copy Ansible root SSH Public Key to Host'
+  tags: 'ansible-key'
+  authorized_key:
+    comment: 'Ansible'
+    user: root
+    key: "{{ lookup('file', '../files/ansible-key.pub') }}"
+    state: present

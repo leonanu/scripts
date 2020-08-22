@@ -1,0 +1,7 @@
+- name: 'Set Do Not Bell on Tab-Completion'
+  tags: 'mute-bell'
+  lineinfile:
+    dest: '/etc/inputrc'
+    regexp: '^# set bell-style none'
+    line: 'set bell-style none'
+    state: present
