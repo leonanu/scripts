@@ -1,0 +1,19 @@
+---
+- hosts: Nanu
+  remote_user: root
+  vars:
+    LOG_TIME: '1s'
+    LOG_SIZE: '1M'
+
+  tasks:
+    - name: 'Clean System Log'
+      tags: 'clean-log'
+      shell:
+        cmd: 'journalctl {{ item }}'
+      with_items:
+        - '--rotate'
+        - '--vacuum-time={{ LOG_TIME }}'
+        - '--vacuum-size={{ LOG_SIZE }}'
+      register: task_output
+
+    - debug: var=task_output
