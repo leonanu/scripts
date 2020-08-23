@@ -1,1 +1,0 @@
-ROOT_CRON: "{{ '/var/spool/cron/crontabs/root' if ansible_distribution == 'Ubuntu' else '/var/spool/cron/root' }}"

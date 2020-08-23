@@ -1,8 +1,0 @@
-- name: 'Set BBR: {{ BBR }}'
-  tags: 'set-bbr'
-  template:
-    src: '10-moss-bbr.conf.template'
-    dest: '/etc/sysctl.d/10-moss-bbr.conf'
-    mode: 0644
-  notify:
-    - 'Apply sysctl'

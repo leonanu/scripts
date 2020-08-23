@@ -1,4 +1,0 @@
-- include: root-ssh.yml
-- include: root-pass.yml
-- include: root-key.yml
-- include: ansible-key.yml

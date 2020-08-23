@@ -1,5 +1,0 @@
-- name: 'Set Timezone to {{ TIMEZONE }}'
-  tags: 'set-timezone'
-  timezone:
-    name: "{{ TIMEZONE }}"
-  notify: 'Restart cron Service'

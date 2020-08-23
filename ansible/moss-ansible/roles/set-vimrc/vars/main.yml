@@ -1,1 +1,0 @@
-VIMRC: "{{ '/etc/vim/vimrc' if ansible_distribution == 'Ubuntu' else '/etc/vimrc' }}"

@@ -1,7 +1,0 @@
-- name: 'Copy SA root SSH Public Key to Host'
-  tags: 'root-key'
-  authorized_key:
-    comment: 'SA'
-    user: root
-    key: "{{ lookup('file', '../files/root-key.pub') }}"
-    state: present

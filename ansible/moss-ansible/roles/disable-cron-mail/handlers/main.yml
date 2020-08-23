@@ -1,5 +1,0 @@
-- name: 'Restart cron Service'
-  systemd:
-    name: cron
-    state: restarted
-    enabled: yes

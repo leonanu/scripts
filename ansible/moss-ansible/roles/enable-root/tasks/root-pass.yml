@@ -1,7 +1,0 @@
-- name: 'Set root Password'
-  tags: 'root-pass'
-  user:
-    name: root
-    # See: https://docs.ansible.com/ansible/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module
-    password: "{{ ROOT_PASSWORD }}"
-    state: present
